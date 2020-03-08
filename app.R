@@ -5,6 +5,5 @@ base_dir <- getwd()
 source(paste0(base_dir, "/my_ui.R"))
 source(paste0(base_dir, "/my_server.R"))
 
-library(shiny)
 
-shinyApp(ui, server)
+shinyApp(myui, myserver)
