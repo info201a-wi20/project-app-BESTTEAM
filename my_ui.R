@@ -5,6 +5,7 @@ base_directory <- paste0(getwd(), "/uis")
 
 # TODO: source your ui .R file here, make sure to put it in the /uis directory.
 source(paste0(base_directory, "/page5_ui.R"))
+base_directory <- paste0(getwd(), "/uis")
 source(paste0(base_directory, "/page1_ui.R"))
 
 home_page <- fluidPage(
