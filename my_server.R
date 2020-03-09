@@ -6,10 +6,10 @@ library("dplyr")
 server_base_directory <- paste0(getwd(), "/uis")
 source(paste0(server_base_directory, "/page1_ui.R"))
 source(paste0(getwd(), "/GetData.R"))
-
+# Page 1
 myserver <- function(input, output) {
   output$plotL1 <- renderPlot({
-    validate(
+    shiny::validate(
       need(input$dateRange[2] > input$dateRange[1], "end date is earlier than start date"
       )
     )
