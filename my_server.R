@@ -1,7 +1,8 @@
 library("shiny")
-source("myowncode.R")
 library("ggplot2")
 library("dplyr")
+base_directory <- paste0(getwd(), "/uis")
+source(paste0(base_directory, "/page1_ui.R"))
 myserver <- function(input, output) {
   output$plotL1 <- renderPlot({
     validate(
