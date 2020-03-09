@@ -5,7 +5,7 @@ library("shiny")
 library("ggplot2")
 
 
-confirmed1 <- read_dta(paste0(getwd(), "/confirmed.dta"))
+confirmed1 <- read_dta(paste0(getwd(), "/data/confirmed.dta"))
 confirmed <- rename(confirmed1, 
                     "1/22/20" = "v6",
                     "1/23/20" = "v7",
@@ -75,7 +75,7 @@ colnames(confirmed2) <- confirmed$regions
 
 
 
-pathL <- paste0(getwd(), "/daily_csv.csv")
+pathL <- paste0(getwd(), "/data/daily_csv.csv")
 ng <- read.csv(pathL, stringsAsFactors = FALSE)
 natural_gas <- ng[5794:5813,]
 
