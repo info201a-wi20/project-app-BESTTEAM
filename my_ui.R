@@ -22,7 +22,7 @@ home <- tabPanel(
 # from others. eg. page1_ui
 page1 <- tabPanel(
   "page1",
-  home_page
+  page1
 )
 
 page2 <- tabPanel(
