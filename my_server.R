@@ -3,8 +3,8 @@ library("ggplot2")
 library("dplyr")
 
 # Sourcing
-base_directory <- paste0(getwd(), "/uis")
-source(paste0(base_directory, "/page1_ui.R"))
+server_base_directory <- paste0(getwd(), "/uis")
+source(paste0(server_base_directory, "/page1_ui.R"))
 source(paste0(getwd(), "/GetData.R"))
 
 myserver <- function(input, output) {
