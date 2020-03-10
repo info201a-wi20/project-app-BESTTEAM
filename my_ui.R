@@ -12,7 +12,7 @@ home_page <- fluidPage(
 )
 
 home <- tabPanel(
-  "Home",
+  "Introduction",
   home_page
 )
 
@@ -21,7 +21,7 @@ home <- tabPanel(
 # substitute home_page with your own layout in your own file. Remember to name it differently
 # from others. eg. page1_ui
 page1 <- tabPanel(
-  "page1",
+  "COVID 19 & Natural Gas",
   page1
 )
 
