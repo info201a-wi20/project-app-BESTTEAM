@@ -1,0 +1,70 @@
+Province.State,Country.Region,Lat,Long,confirmed,recovered
+,Sri Lanka,7.8731,80.7718,1,1
+,Sebia,,,1,0
+,Nepal,28.3949,84.124,1,1
+Tibet,Mainland China,30.1534,88.7879,1,1
+,Finland,61.9241,25.7482,1,1
+,Cambodia,12.5657,104.991,1,1
+,Russia,61.524,105.3188,17,3
+,Philippines,12.8797,121.774,3,1
+Macau,Macau,22.1987,113.5439,10,10
+,Vietnam,21.0278,105.8342,16,16
+Qinghai,Mainland China,35.65945,96.02564,18,18
+,Czech Republic,,,31,
+,Lebanon,,,32,0
+,Denmark,,,35,0
+,Israel,,,39,0
+,India,20.5937,78.9629,43,3
+,United Arab Emirates,23.4241,53.8478,45,4
+Taiwan,Taiwan,23.6978,120.9605,45,15
+,Thailand,13.7563,100.5018,50,31
+,Egypt,26.8206,30.8025,55,12
+,Iceland,,,58,0
+,Iraq,,,60,0
+,Kuwait,,,64,0
+,Greece,,,73,0
+Inner Mongolia,Mainland China,44.09448,113.9456,75,70
+Ningxia,Mainland China,37.26923,106.1655,75,71
+Xinjiang,Mainland China,41.11981,85.17822,76,73
+,Australia,-33.8688,151.2093,76,23
+Jilin,Mainland China,43.66657,126.1917,93,90
+Hong Kong,Hong Kong,22.3193,114.1694,115,59
+,Malaysia,4.2105,101.9758,117,24
+Gansu,Mainland China,36.0611,103.8343,124,87
+Liaoning,Mainland China,41.29284,122.6086,125,109
+Tianjin,Mainland China,39.29362,117.333,131,130
+Shanxi,Mainland China,37.57769,112.2922,132,126
+"London, ON",Canada,42.9849,-81.2453,132,2
+Guizhou,Mainland China,26.81536,106.8748,146,123
+,Singapore,1.3521,103.8198,150,78
+Hainan,Mainland China,19.19673,109.7455,168,159
+Yunnan,Mainland China,24.97411,101.4868,174,170
+,Belgium,50.5039,4.4699,200,1
+,Sweden,60.1282,18.6435,203,3
+Shaanxi,Mainland China,35.19165,108.8701,245,227
+Guangxi,Mainland China,23.82908,108.7881,252,230
+,UK,55.3781,-3.436,280,18
+Fujian,Mainland China,26.07783,117.9895,296,295
+Hebei,Mainland China,38.0428,114.5149,318,307
+Shanghai,Mainland China,31.20327,121.4554,342,315
+Beijing,Mainland China,40.18238,116.4142,428,315
+Heilongjiang,Mainland China,47.862,127.7622,481,421
+,Japan,35.6762,139.6503,511,76
+Sichuan,Mainland China,30.61714,102.7103,539,466
+,US,40.6331,-89.3985,564,8
+Chongqing,Mainland China,30.05718,107.874,576,528
+Jiangsu,Mainland China,32.97027,119.464,631,621
+Shandong,Mainland China,36.34377,118.1529,758,700
+,Spain,40.4637,-3.7492,909,32
+Jiangxi,Mainland China,27.61401,115.7221,935,921
+Anhui,Mainland China,31.82571,117.2264,990,987
+Hunan,Mainland China,27.61041,111.7088,1018,979
+,Germany,51.1657,10.4515,1151,12
+,France,46.2276,2.2137,1209,12
+Zhejiang,Mainland China,29.18251,120.0985,1215,1176
+Henan,Mainland China,33.88202,113.614,1272,1247
+Guangdong,Mainland China,23.33841,113.422,1352,1260
+,Iran,32.4279,53.688,6566,2134
+,Italy,41.8719,12.5674,7375,622
+,South Korea,37.5665,126.978,7478,118
+Hubei,Mainland China,30.97564,112.2707,67743,46485
