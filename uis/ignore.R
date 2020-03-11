@@ -67,8 +67,8 @@ myserver <- function(input, output) {
     rate_plot
   })
   output$graph_t2 <- renderPlot({
-    confirmed <- read.csv(paste0(getwd(), "/data/cov_data/confirmed_2_20_20.csv"), stringsAsFactors = FALSE)
-    death <- read.csv(paste0(getwd(), "/data/cov_data/death_2_20_20.csv"), stringsAsFactors = FALSE)
+    confirmed <- read.csv(paste0(getwd(), "/confirmed_2_20_20.csv"), stringsAsFactors = FALSE)
+    death <- read.csv(paste0(getwd(), "/death_2_20_20.csv"), stringsAsFactors = FALSE)
 
     for(i in 1:30){
       colnames(confirmed)[i+1] = substring(colnames(confirmed)[i+1], 2)
@@ -110,5 +110,4 @@ myserver <- function(input, output) {
   
 }
 
-setwd("/Users/hu/Desktop/INFO/project-app-BESTTEAM/")
 shinyApp(myui, myserver)
