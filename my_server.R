@@ -35,6 +35,73 @@ myserver <- function(input, output) {
     cases_plot
   })
   
+  #page4
+  map_gg <- map_data("world")
+  map_gg <- mutate(map_gg, iso3c = iso.alpha(map_gg$region, n = 3))
+  
+  output$graph_t1 <- renderPlot({
+    
+    recover_rate <- read.csv(paste0(server_base_directory, "/page4_data/recovery_data.csv"), stringsAsFactors = FALSE)
+    recover_rate[recover_rate$Country.Region == "Mainland China", "Country.Region"] = "China"
+    recover_rate[recover_rate$Country.Region == "Hong Kong", "Country.Region"] = "China"
+    recover_rate[recover_rate$Country.Region == "Macau", "Country.Region"] = "China"
+    recover_rate[recover_rate$Country.Region == "Taiwan", "Country.Region"] = "China"
+    recover_rate[recover_rate$Country.Region == "US", "Country.Region"] = "United States"
+    recover_rate <- recover_rate %>%
+      group_by(Country.Region) %>%
+      summarize(sum_confirm = sum(confirmed),
+                sum_recover = sum(recovered),
+                rate = 100 * sum_recover/sum_confirm)%>%
+      select(Country.Region, rate)
+    recover_rate <- mutate(recover_rate, iso3c = iso.alpha(recover_rate$Country.Region, n = 3))
+    
+    comparision <- left_join(map_gg, recover_rate, by = "iso3c")
+    
+    rate_plot <- ggplot(data = comparision) +
+      geom_polygon(aes(x = long, y = lat, group = group, fill = rate)) +
+      coord_quickmap() +
+      theme_void()
+    rate_plot
+  })
+  
+  output$graph_t2 <- renderPlot({
+    confirmed <- read.csv(paste0(server_base_directory, "/page4_data/confirmed_2_20_20.csv"), stringsAsFactors = FALSE)
+    death <- read.csv(paste0(server_base_directory, "/page4_data/death_2_20_20.csv"), stringsAsFactors = FALSE)
+    
+    for(i in 1:30){
+      colnames(confirmed)[i+1] = substring(colnames(confirmed)[i+1], 2)
+      colnames(death)[i+1] = substring(colnames(death)[i+1], 2)
+    }
+    
+    confirmed <- mutate(confirmed, iso3c = iso.alpha(confirmed$Country.Region, n = 3))
+    death <- mutate(death, iso3c = iso.alpha(death$Country.Region, n = 3))
+    conbine_confirmed <- left_join(map_gg, confirmed, by = "iso3c")
+    conbine_death <- left_join(map_gg, death, by = "iso3c")
+    case_date <- gsub("-",".",as.character(input$case_date))
+    
+    tables <- list(total_death = conbine_death, total_confirmed = conbine_confirmed)
+    
+    draw_graph <- function(string){
+      df <- tables[[string]]
+      return(df)
+    }
+    graph_df <- draw_graph(input$status)
+    specific <- graph_df %>%
+      mutate(cut_value = cut(graph_df[, case_date], breaks=c(-Inf,5,10,30,100,200,1000,2000,Inf),
+                             labels = c("less than 5", "5-10", "10-30","30-100", "100-200", "200-1000", "1000-2000", "more than 2000")))%>%
+      select(long, lat, group, order, region, subregion, iso3c, Country.Region, case_date, cut_value)
+    colnames(specific)[9] = "values"
+    case_plot <- ggplot(data = specific) +
+      geom_polygon(aes(x = long, y = lat, group = group, fill = cut_value)) + 
+      scale_colour_brewer(palette = "Reds") +
+      labs(title = paste(input$status, "by Coronavirus-19 worldwide"),
+           fill = "Cases")+
+      coord_quickmap() +
+      theme_void()
+    
+    case_plot 
+  })
+  
   # page 5
   output$graph_q5 <- renderPlot({
     virus <- getVirus()

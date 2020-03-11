@@ -4,8 +4,11 @@ ui_base_directory <- paste0(getwd(), "/uis")
 
 
 # TODO: source your ui .R file here, make sure to put it in the /uis directory.
-source(paste0(ui_base_directory, "/page5_ui.R"))
 source(paste0(ui_base_directory, "/page1_ui.R"))
+
+source(paste0(ui_base_directory, "/page4_ui(map).R"))
+source(paste0(ui_base_directory, "/page5_ui.R"))
+
 
 home_page <- fluidPage(
   "This is a place holder for the home page"
@@ -36,8 +39,8 @@ page3 <- tabPanel(
 )
 
 page4 <- tabPanel(
-  "page4",
-  home_page
+  "Global Cases & Recover Rate Map",
+  page4_ui
 )
 
 page5 <- tabPanel(
