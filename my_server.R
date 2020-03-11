@@ -103,8 +103,31 @@ myserver <- function(input, output) {
   })
   
   # page 5
+  virus <- getVirus()
+  output$analysis_q5 <- renderText({
+    processed_uf <- virus %>% group_by(Date) %>%
+      summarise(sum_confirmed = sum(Confirmed),
+                sum_death = sum(Deaths),
+                sum_recovered = sum(Recovered)) %>%
+      mutate(death_rate = sum_death * 100 / sum_confirmed,
+             recover_rate = sum_recovered * 100 / sum_confirmed)
+    
+    temp <- (virus %>% group_by(Country.Region) %>% summarise(sum_confirmed = sum(Confirmed),
+                                                              sum_death = sum(Deaths),
+                                                              sum_recovered = sum(Recovered)))
+    
+    return(paste0("Base on the current data, we can see that the death rate of ",
+           round((processed_uf %>% arrange(Date) %>% tail(1))$death_rate,2),
+    "% and the recover rate of ",
+    round((processed_uf %>% arrange(Date) %>% tail(1))$recover_rate, 2),
+    "% are approaching to the right estimated value and more and more people are getting recovered from the virus.",
+    " The death rate fluctuates becuase the outbreaks in different countries happen at different times. The mean of the",
+    " death rate among all countries are ", round(mean(temp$sum_death * 100 / temp$sum_confirmed, na.rm = TRUE),2),
+    "%. While there is no medical treatment targetting this virus,",
+    " there is no need to worry about it too much if the right actions are made to protect people from getting infected."))
+  })
+  
   output$graph_q5 <- renderPlot({
-    virus <- getVirus()
     if (input$region_q5 != "all") virus <- virus %>% filter(Country.Region == input$region_q5)
     processed <- virus %>% group_by(Date) %>%
       summarise(sum_confirmed = sum(Confirmed),

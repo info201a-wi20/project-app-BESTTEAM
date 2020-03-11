@@ -44,7 +44,7 @@ page4 <- tabPanel(
 )
 
 page5 <- tabPanel(
-  "page5",
+  "Global Recover Rate & Death Rate Trend",
   page5_ui
 )
 

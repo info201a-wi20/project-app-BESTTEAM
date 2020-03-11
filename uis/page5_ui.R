@@ -30,5 +30,6 @@ page5_ui <- fluidPage(
       h3("Graph: "),
       plotOutput(outputId = "graph_q5")
     )
-  )
+  ),
+  textOutput("analysis_q5")
 )
