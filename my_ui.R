@@ -6,6 +6,7 @@ ui_base_directory <- paste0(getwd(), "/uis")
 # TODO: source your ui .R file here, make sure to put it in the /uis directory.
 source(paste0(ui_base_directory, "/page5_ui.R"))
 source(paste0(ui_base_directory, "/page1_ui.R"))
+source(paste0(ui_base_directory, "/page2_ui.R"))       # added
 
 home_page <- fluidPage(
   "This is a place holder for the home page"
@@ -27,7 +28,7 @@ page1 <- tabPanel(
 
 page2 <- tabPanel(
   "page2",
-  home_page
+  page2_ui
 )
 
 page3 <- tabPanel(
