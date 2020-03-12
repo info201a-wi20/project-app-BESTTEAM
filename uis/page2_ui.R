@@ -3,6 +3,7 @@ source(paste0(getwd(), "/GetData.R"))
 
 # select date range + radioButtons + filter dataset
 base_dir <- paste0(getwd(), "/uis")
+source(paste0(getwd(), "/GetData.R"))
 stock_df <- getStock("2020-01-22", "2020-02-20", "CN")
 stock_df <- stock_df %>% select(Date, volume)
 date_choices <- as.Date(stock_df$Date)
@@ -40,7 +41,7 @@ page2_ui <- fluidPage(
                      "Confirmed cases ",
                      "Volume of stock ",
                      "Confirmed cases & Volume of stock"
-                   ), selected = "Confirmed cases")
+                   ), selected = "Confirmed cases ")
     ),
     mainPanel(
       h3("Graph: "),

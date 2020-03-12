@@ -178,51 +178,66 @@ output$analysis_q2 <- renderText({
     return(greeting)
 })
   
-output$graph_q2 <- renderPlot({
-  if (input$q2_volume == "Confirmed cases ") {
-    volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
-      geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      labs(
-        title = "Confirmed cases trending throughout time",
-        x = "Date",
-        y = "Confirmed cases",
-        color = "Legend"
-      )
-  } else if (input$q2_volume == "Volume of stock ") {
-    volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
+# output$graph_q2 <- renderPlot({
+#   if (input$q2_volume == "Confirmed cases ") {
+#     volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
+#       geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
+#       theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+#       labs(
+#         title = "Confirmed cases trending throughout time",
+#         x = "Date",
+#         y = "Confirmed cases",
+#         color = "Legend"
+#       )
+#   } else if (input$q2_volume == "Volume of stock ") {
+#     volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
+
+  # page 2
+  output$graph_q2 <- renderPlot({
+    print(input$q2_volume)
+    if (input$q2_volume == "Confirmed cases ") {
+      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
+        geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(
+          title = "Confirmed cases trending throughout time",
+          x = "Date",
+          y = "Confirmed cases",
+          color = "Legend"
+        )
+    } else if (input$q2_volume == "Volume of stock ") {
+      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
+          geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
+          theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+          labs(
+            title = "Volume of stock trending",
+            x = "Date",
+            y = "Volume of stock",
+            color = "Legend"
+          )
+    } else {
+      case_one <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
+        geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(
+          title = "Confirmed cases trending",
+          x = "Date",
+          y = "Confirmed cases",
+          color = "Legend"
+        )
+      volume_two <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
         geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
         theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
         labs(
-          title = "Volume of stock trending throughout time",
+          title = "Volume of stock trending",
           x = "Date",
           y = "Volume of stock",
           color = "Legend"
         )
-  } else {
-    case_one <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
-      geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      labs(
-        title = "Confirmed cases trending",
-        x = "Date",
-        y = "Confirmed cases",
-        color = "Legend"
-      )
-    volume_two <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
-      geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
-      theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-      labs(
-        title = "Volume of stock trending",
-        x = "Date",
-        y = "Volume of stock",
-        color = "Legend"
-      )
-    volume_case <- grid.arrange(case_one, volume_two, nrow = 1)
-  }
-  return(volume_case)
-})
-
+      volume_case <- grid.arrange(case_one, volume_two, nrow = 1)
+    }
+    return(volume_case)
+  })
 }
 
 
