@@ -1,7 +1,7 @@
 library(shiny)
 
 page5_ui <- fluidPage(
-  titlePanel("Question 5 Title Placeholder"),
+  titlePanel("Global Recover & Death Rate trend"),
   sidebarLayout(
     sidebarPanel(
       h3("Options"),
