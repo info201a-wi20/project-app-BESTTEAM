@@ -4,8 +4,8 @@ library("dplyr")
 library("shiny")
 library("ggplot2")
 
-natural_gas <- read.csv("page1_data/natural_gas.csv", stringsAsFactors = FALSE, header = TRUE)
-confirmed_cases <- read.csv("page1_data/confirmed_cases.csv", stringsAsFactors = FALSE, header = TRUE)
+natural_gas <- read.csv("uis/page1_data/natural_gas.csv", stringsAsFactors = FALSE, header = TRUE)
+confirmed_cases <- read.csv("uis/page1_data/confirmed_cases.csv", stringsAsFactors = FALSE, header = TRUE)
 dates <- c("2020-01-22", 
            "2020-01-23", 
            "2020-01-24",
