@@ -109,8 +109,7 @@ virus_df_new <-data.frame(c(mean)) %>%
 virus_df_new <- virus_df_new[-c(4, 5, 6, 11, 12, 18, 19, 22, 23), ]
 new_date_frame_close <- data.frame(stock_df_close, virus_df_new)
 
-myserver <- function(input, output) {
-  output$plotL1 <- renderPlot({
+  output$plotC1 <- renderPlot({
     stock_close_plot <- ggplot(data = new_date_frame_close, mapping = aes(x=Date, y=new_date_frame_close$close)) + 
       geom_point(stat="identity", position=position_dodge(), fill = "purple")+
       theme(axis.text.x = element_text(angle=90, hjust = 1))+
@@ -120,7 +119,7 @@ myserver <- function(input, output) {
     stock_close_plot
   })
   
-  output$plotL2 <- renderPlot({
+  output$plotC2 <- renderPlot({
     confirm_case_plot <- ggplot(data = new_date_frame_close, mapping = aes(x=Date, y=new_date_frame_close$virus_df))+
       geom_point(stat="identity", position=position_dodge(), fill = "purple")+
       theme(axis.text.x = element_text(angle=90, hjust = 1))+
@@ -129,7 +128,6 @@ myserver <- function(input, output) {
            color = "Legend")
     confirm_case_plot
   })
-}
   
   #page4
   map_gg <- map_data("world")

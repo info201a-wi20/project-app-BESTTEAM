@@ -16,7 +16,7 @@ page3_ui <- fluidPage(
                             start = "2020-01-22",
                             end = "2020-02-20",
                             ),
-             plotOutput("plotL1"),
+             plotOutput("plotC1"),
              p("We can conclude that stock closing amount is correlated with the 
                number of confirmed cases. As the number of confirmed cases grow, 
                our economy does get affected.")),
@@ -29,7 +29,7 @@ page3_ui <- fluidPage(
                             start = "2020-01-22",
                             end = "2020-02-20",
                             ),
-             plotOutput("plotL2"),
+             plotOutput("plotC2"),
              p("Confirmed cases gradually increase as time goes on."))
   )
 )
