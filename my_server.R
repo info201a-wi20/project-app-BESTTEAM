@@ -3,9 +3,6 @@ library("ggplot2")
 library("dplyr")
 
 # Sourcing
-server_base_directory <- paste0(getwd(), "/uis")
-source(paste0(server_base_directory, "/page1_ui.R"))
-source(paste0(server_base_directory, "/page2_ui.R"))
 source(paste0(getwd(), "/GetData.R"))
 # Page 1
 myserver <- function(input, output) {
@@ -14,6 +11,7 @@ myserver <- function(input, output) {
       need(input$dateRange[2] > input$dateRange[1], "end date is earlier than start date"
       )
     )
+    natural_gas <- read.csv("uis/page1_data/natural_gas.csv", stringsAsFactors = FALSE, header = TRUE)
     ng_data <- natural_gas %>% 
       filter(Date <= as.Date(input$dateRange[2]) & Date >= as.Date(input$dateRange[1]))
     ng_plot <- ggplot(aes(x = Date, y = Price), data = ng_data) + 
@@ -25,8 +23,10 @@ myserver <- function(input, output) {
     ng_plot
   })
   output$plotL2 <- renderPlot({
-    cases_plot <- ggplot(confirmed2, 
-                         aes(x = dates, 
+    confirmed_cases <- read.csv("uis/page1_data/confirmed_cases.csv", stringsAsFactors = FALSE, header = TRUE)
+    confirmed_cases$date <- confirmed_cases$X
+    cases_plot <- ggplot(confirmed_cases, 
+                         aes(x = date, 
                              y = confirmed2[[input$Region_choice]]))+
       geom_point(color = "purple", size = 3)+
       geom_line(group = 1, color = "orange")+

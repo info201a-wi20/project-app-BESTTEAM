@@ -4,40 +4,8 @@ library("dplyr")
 library("shiny")
 library("ggplot2")
 
-
-confirmed1 <- read_dta(paste0(getwd(), "/data/confirmed.dta"))
-confirmed <- rename(confirmed1, 
-                    "1/22/20" = "v6",
-                    "1/23/20" = "v7",
-                    "1/24/20" = "v8",
-                    "1/25/20" = "v9",
-                    "1/26/20" = "v10",
-                    "1/27/20" = "v11",
-                    "1/28/20" = "v12",
-                    "1/29/20" = "v13",
-                    "1/30/20" = "v14",
-                    "1/31/20" = "v15",
-                    "2/1/20" = "v16",
-                    "2/2/20" = "v17",
-                    "2/3/20" = "v18",
-                    "2/4/20" = "v19",
-                    "2/5/20" = "v20",
-                    "2/6/20" = "v21",
-                    "2/7/20" = "v22",
-                    "2/8/20" = "v23",
-                    "2/9/20" = "v24",
-                    "2/10/20" = "v25",
-                    "2/11/20" = "v26",
-                    "2/12/20" = "v27",
-                    "2/13/20" = "v28",
-                    "2/14/20" = "v29",
-                    "2/15/20" = "v30",
-                    "2/16/20" = "v31",
-                    "2/17/20" = "v32",
-                    "2/18/20" = "v33",
-                    "2/19/20" = "v34",
-                    "2/20/20" = "v35")
-
+natural_gas <- read.csv("page1_data/natural_gas.csv", stringsAsFactors = FALSE, header = TRUE)
+confirmed_cases <- read.csv("page1_data/confirmed_cases.csv", stringsAsFactors = FALSE, header = TRUE)
 dates <- c("2020-01-22", 
            "2020-01-23", 
            "2020-01-24",
@@ -69,18 +37,7 @@ dates <- c("2020-01-22",
            "2020-02-19",
            "2020-02-20")
 
-
-confirmed2 <- data.frame(t(confirmed[-1]))
-colnames(confirmed2) <- confirmed$regions
-
-
-
-pathL <- paste0(getwd(), "/data/daily_csv.csv")
-ng <- read.csv(pathL, stringsAsFactors = FALSE)
-natural_gas <- ng[5794:5813,]
-
-
-region_choices <- colnames(confirmed2)
+region_choices <- colnames(confirmed_cases)[-1]
 region_input <- selectInput(
   label = "Region",
   choices = region_choices,
