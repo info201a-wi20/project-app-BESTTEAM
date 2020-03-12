@@ -6,7 +6,6 @@ base_dir <- paste0(getwd(), "/uis")
 source(paste0(getwd(), "/GetData.R"))
 stock_df <- getStock("2020-01-22", "2020-02-20", "CN")
 stock_df <- stock_df %>% select(Date, volume)
-date_choices <- as.Date(stock_df$Date)
 
 virus_df <- read.csv("data/cov_data/time_series_covid_19_confirmed.csv", 
                      stringsAsFactors = FALSE)
@@ -29,12 +28,7 @@ page2_ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       h3("Choose the date and/or the specific relationship graph"),
-      dateRangeInput('dateRange_volume',
-                     label = 'Select the date range that you want the graph to cover',
-                     start = date_choices[1], 
-                     end = date_choices[length(date_choices)],
-                     min = date_choices[1],
-                     max = date_choices[length(date_choices)]),
+      textInput(inputId = "date_insert", label = "Input a date(in the form: yyyy-mm-dd):"),
       radioButtons("q2_volume",
                    "Graph selection: ",
                    c(
@@ -48,5 +42,7 @@ page2_ui <- fluidPage(
       plotOutput(outputId = "graph_q2")
     )
   ),
+  textOutput(outputId = "result"),
+  
   textOutput("analysis_q2")
 )
