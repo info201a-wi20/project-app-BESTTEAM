@@ -5,6 +5,8 @@ account: andrewliurm
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 1942454
-bundleId: 2876380
+bundleId: 2876435
 url: https://andrewliurm.shinyapps.io/project-app-bestteam/
-when: 1584051478.8528
+when: 1584053140.17486
+asMultiple: FALSE
+asStatic: FALSE

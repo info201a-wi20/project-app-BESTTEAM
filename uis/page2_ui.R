@@ -28,7 +28,12 @@ page2_ui <- fluidPage(
   sidebarLayout(
     sidebarPanel(
       h3("Choose the date and/or the specific relationship graph"),
-      textInput(inputId = "date_insert", label = "Input a date(in the form: yyyy-mm-dd):"),
+      dateRangeInput('dateRange_volume_q2',
+                     label = 'Select the date range that you want to the to cover',
+                     start = date_choices[1], 
+                     end = date_choices[length(date_choices)],
+                     min = date_choices[1],
+                     max = date_choices[length(date_choices)]),
       radioButtons("q2_volume",
                    "Graph selection: ",
                    c(

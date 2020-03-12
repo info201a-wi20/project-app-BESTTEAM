@@ -46,7 +46,7 @@ myserver <- function(input, output) {
 # page 2
   output$result <- renderText({
     #user_result <- new_date_frame %>% filter(Date == input$date_insert) %>% pull(virus_df_new)
-    return(paste("Your selected date is", input$date_insert, ", you can find more information in the given date 
+    return(paste("Your selected date is", input$dateRange_volume_q2[1], ", you can find more information in the given date 
                  on confirmed cases and volume of stock in the above graph."))
   })
   
@@ -58,6 +58,11 @@ myserver <- function(input, output) {
   })
   
   output$graph_q2 <- renderPlot({
+    shiny::validate(
+      need(input$dateRange[2] > input$dateRange[1], "end date is earlier than start date"
+      )
+    )
+    new_date_frame <- new_date_frame %>% filter(Date <= input$dateRange_volume_q2[2]) %>% filter(Date >= input$dateRange_volume_q2[1])
     if (input$q2_volume == "Confirmed cases ") {
       volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
         geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
@@ -126,11 +131,11 @@ new_date_frame_close <- data.frame(stock_df_close, virus_df_new, stringsAsFactor
 
 
 output$graph_q3 <- renderPlot({
-  new_date_frame_close <- new_date_frame_close %>% filter(Date <= input$dateRange_volume[2]) %>% filter(Date >= input$dateRange_volume[1])
   shiny::validate(
     need(input$dateRange_volume[2] > input$dateRange_volume[1], "end date is earlier than start date"
     )
   )
+  new_date_frame_close <- new_date_frame_close %>% filter(Date <= input$dateRange_volume[2]) %>% filter(Date >= input$dateRange_volume[1])
   if (input$q3_volume == "Closing Stock Amount") {
     closing_case <- ggplot(data = new_date_frame_close, mapping = aes(x=Date, y=new_date_frame_close$close)) + 
       geom_point(stat="identity", position=position_dodge(width = 2), fill = "purple")+
