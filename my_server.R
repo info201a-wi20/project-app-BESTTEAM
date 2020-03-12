@@ -29,7 +29,7 @@ myserver <- function(input, output) {
     confirmed_cases$date <- confirmed_cases$X
     cases_plot <- ggplot(confirmed_cases, 
                          aes(x = date, 
-                             y = confirmed2[[input$Region_choice]]))+
+                             y = confirmed_cases[[input$Region_choice]]))+
       geom_point(color = "purple", size = 3)+
       geom_line(group = 1, color = "orange")+
       theme(axis.text.x = element_text(angle=90))+
