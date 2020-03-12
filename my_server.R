@@ -36,6 +36,97 @@ myserver <- function(input, output) {
     cases_plot
   })
   
+  # page 2
+  output$graph_q2 <- renderPlot({
+    print(input$q2_volume)
+    if (input$q2_volume == "Confirmed cases ") {
+      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
+        geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(
+          title = "Confirmed cases trending throughout time",
+          x = "Date",
+          y = "Confirmed cases",
+          color = "Legend"
+        )
+    } else if (input$q2_volume == "Volume of stock ") {
+      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
+        geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(
+          title = "Volume of stock trending throughout time",
+          x = "Date",
+          y = "Volume of stock",
+          color = "Legend"
+        )
+    } else {
+      case_one <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
+        geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(
+          title = "Confirmed cases trending",
+          x = "Date",
+          y = "Confirmed cases",
+          color = "Legend"
+        )
+      volume_two <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
+        geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
+        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
+        labs(
+          title = "Volume of stock trending",
+          x = "Date",
+          y = "Volume of stock",
+          color = "Legend"
+        )
+      volume_case <- grid.arrange(case_one, volume_two, nrow = 1)
+    }
+    return(volume_case)
+  })
+}
+
+# page 3
+# select date range + radioButtons + filter dataset
+base_dir <- paste0(getwd(), "/uis")
+stock_df <- getStock("2020-01-22", "2020-02-20", "CN")
+virus_df <- read.csv("data/cov_data/time_series_covid_19_confirmed.csv", 
+                     stringsAsFactors = FALSE)
+stock_df_close <- stock_df %>% select(Date, close)
+virus_df <- virus_df %>% filter(Country.Region == "Mainland China")
+
+drops <- c("Province.State", "Country.Region", "Lat", "Long")
+virus_df <- virus_df[ , !(names(virus_df) %in% drops)]
+mean <- virus_df %>% 
+  summarise_all("mean")
+
+virus_df_new <-data.frame(c(mean)) %>% 
+  gather(key = Date, value = Confirmed_cases) %>% select(Confirmed_cases)
+
+
+virus_df_new <- virus_df_new[-c(4, 5, 6, 11, 12, 18, 19, 22, 23), ]
+new_date_frame_close <- data.frame(stock_df_close, virus_df_new)
+
+myserver <- function(input, output) {
+  output$plotL1 <- renderPlot({
+    stock_close_plot <- ggplot(data = new_date_frame_close, mapping = aes(x=Date, y=new_date_frame_close$close)) + 
+      geom_point(stat="identity", position=position_dodge(), fill = "purple")+
+      theme(axis.text.x = element_text(angle=90, hjust = 1))+
+      labs(x = "Date",
+           y = "Stock Closing Amount",
+           color = "Legend")
+    stock_close_plot
+  })
+  
+  output$plotL2 <- renderPlot({
+    confirm_case_plot <- ggplot(data = new_date_frame_close, mapping = aes(x=Date, y=new_date_frame_close$virus_df))+
+      geom_point(stat="identity", position=position_dodge(), fill = "purple")+
+      theme(axis.text.x = element_text(angle=90, hjust = 1))+
+      labs(x = "Date", 
+           y = "Confirmed Cases",
+           color = "Legend")
+    confirm_case_plot
+  })
+}
+  
   #page4
   map_gg <- map_data("world")
   map_gg <- mutate(map_gg, iso3c = iso.alpha(map_gg$region, n = 3))
@@ -171,53 +262,5 @@ myserver <- function(input, output) {
     
     return(death_vs_recover)
   })
-
-  # page 2
-  output$graph_q2 <- renderPlot({
-    print(input$q2_volume)
-    if (input$q2_volume == "Confirmed cases ") {
-      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
-        geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
-        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-        labs(
-          title = "Confirmed cases trending throughout time",
-          x = "Date",
-          y = "Confirmed cases",
-          color = "Legend"
-        )
-    } else if (input$q2_volume == "Volume of stock ") {
-      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
-          geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
-          theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-          labs(
-            title = "Volume of stock trending throughout time",
-            x = "Date",
-            y = "Volume of stock",
-            color = "Legend"
-          )
-    } else {
-      case_one <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
-        geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
-        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-        labs(
-          title = "Confirmed cases trending",
-          x = "Date",
-          y = "Confirmed cases",
-          color = "Legend"
-        )
-      volume_two <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
-        geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
-        theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
-        labs(
-          title = "Volume of stock trending",
-          x = "Date",
-          y = "Volume of stock",
-          color = "Legend"
-        )
-      volume_case <- grid.arrange(case_one, volume_two, nrow = 1)
-    }
-    return(volume_case)
-  })
-}
 
 
