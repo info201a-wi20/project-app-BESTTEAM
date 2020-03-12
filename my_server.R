@@ -4,6 +4,8 @@ library("dplyr")
 # install.packages("gridExtra")
 library("gridExtra")
 
+server_base_directory <- paste0(getwd(), "/uis")
+
 # Sourcing
 source(paste0(getwd(), "/GetData.R"))
 # Page 1
