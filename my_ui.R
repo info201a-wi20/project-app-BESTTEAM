@@ -34,7 +34,7 @@ page2 <- tabPanel(
 )
 
 page3 <- tabPanel(
-  "page3",
+  "Confirmed cases & closing amount of stock",
   page3_ui
 )
 
