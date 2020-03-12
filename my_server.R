@@ -1,6 +1,8 @@
 library("shiny")
 library("ggplot2")
 library("dplyr")
+# install.packages("gridExtra")
+library("gridExtra")
 
 # Sourcing
 server_base_directory <- paste0(getwd(), "/uis")
@@ -38,13 +40,20 @@ myserver <- function(input, output) {
   
   # page 2
   output$analysis_q2 <- renderText({
-    greeting <- p("hello")
-    return(greeting)
+    return("From the graph, we can see that the confirmed cases is increasing throughout time,
+    but since we have limited data, this may not perfectly predict future. The volume of stock is generally increasing 
+           throughout time, but sometimes the volume is pretty low. So we can see that there's some correlation between
+           confirmed cases and the volume of stock, but not much. ")
   })
   output$graph_q2 <- renderPlot({
-    print(input$q2_volume)
+    shiny::validate(
+      need(input$dateRange[2] > input$dateRange[1], "end date is earlier than start date"
+      )
+    )
+    ng_data <- new_date_frame %>% 
+      filter(Date <= as.Date(input$dateRange[2]) & Date >= as.Date(input$dateRange[1]))
     if (input$q2_volume == "Confirmed cases ") {
-      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
+      volume_case <- ggplot(data = ng_data, mapping = aes(x=Date, y=virus_df_new)) +
         geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
         theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
         labs(
@@ -54,7 +63,7 @@ myserver <- function(input, output) {
           color = "Legend"
         )
     } else if (input$q2_volume == "Volume of stock ") {
-      volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
+      volume_case <- ggplot(data = ng_data, mapping = aes(x=Date, y=volume)) +
         geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
         theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
         labs(
@@ -64,7 +73,7 @@ myserver <- function(input, output) {
           color = "Legend"
         )
     } else {
-      case_one <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
+      case_one <- ggplot(data = ng_data, mapping = aes(x=Date, y=virus_df_new)) +
         geom_bar(stat="identity", position=position_dodge(), fill = "chocolate3") + 
         theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
         labs(
@@ -73,7 +82,7 @@ myserver <- function(input, output) {
           y = "Confirmed cases",
           color = "Legend"
         )
-      volume_two <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=volume)) +
+      volume_two <- ggplot(data = ng_data, mapping = aes(x=Date, y=volume)) +
         geom_bar(stat="identity", position=position_dodge(), fill = "burlywood2") + 
         theme(axis.text.x = element_text(angle = 90, hjust = 1)) +
         labs(
