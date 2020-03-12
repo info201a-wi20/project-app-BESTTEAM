@@ -8,7 +8,7 @@ library(jsonlite)
 # country code of country ("US", "CN")
 getStock <- function(f, t, country_code) {
   # use of api deprecated
-  df <- read.csv(paste0(getwd(),"/data/stock.csv"))
+  df <- read.csv(paste0(getwd(),"/data/stock.csv"), stringsAsFactors = FALSE)
   return(df)
 }
 

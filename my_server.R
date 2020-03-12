@@ -122,10 +122,15 @@ virus_df_new <-data.frame(c(mean)) %>%
 
 
 virus_df_new <- virus_df_new[-c(4, 5, 6, 11, 12, 18, 19, 22, 23), ]
-new_date_frame_close <- data.frame(stock_df_close, virus_df_new)
+new_date_frame_close <- data.frame(stock_df_close, virus_df_new, stringsAsFactors = FALSE)
 
 
 output$graph_q3 <- renderPlot({
+  new_date_frame_close <- new_date_frame_close %>% filter(Date <= input$dateRange_volume[2]) %>% filter(Date >= input$dateRange_volume[1])
+  shiny::validate(
+    need(input$dateRange_volume[2] > input$dateRange_volume[1], "end date is earlier than start date"
+    )
+  )
   if (input$q3_volume == "Closing Stock Amount") {
     closing_case <- ggplot(data = new_date_frame_close, mapping = aes(x=Date, y=new_date_frame_close$close)) + 
       geom_point(stat="identity", position=position_dodge(width = 2), fill = "purple")+
