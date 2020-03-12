@@ -1,4 +1,5 @@
 library(shiny)
+source(paste0(getwd(), "/GetData.R"))
 
 # select date range + radioButtons + filter dataset
 base_dir <- paste0(getwd(), "/uis")
@@ -23,18 +24,18 @@ virus_df_new <- virus_df_new[-c(4, 5, 6, 11, 12, 18, 19, 22, 23), ]
 new_date_frame <- data.frame(stock_df, virus_df_new)
 
 page2_ui <- fluidPage(
-  titlePanel("Question 2 Title Placeholder"),
+  titlePanel("Confirmed cases & volume of stock"),
   sidebarLayout(
     sidebarPanel(
       h3("Choose the date and/or the specific relationship graph"),
       dateRangeInput('dateRange_volume',
-                     label = 'Select the date range that you want to the to cover',
+                     label = 'Select the date range that you want the graph to cover',
                      start = date_choices[1], 
                      end = date_choices[length(date_choices)],
                      min = date_choices[1],
                      max = date_choices[length(date_choices)]),
       radioButtons("q2_volume",
-                   "Rate Selection: ",
+                   "Graph selection: ",
                    c(
                      "Confirmed cases ",
                      "Volume of stock ",
@@ -45,5 +46,6 @@ page2_ui <- fluidPage(
       h3("Graph: "),
       plotOutput(outputId = "graph_q2")
     )
-  )
+  ),
+  textOutput("analysis_q2")
 )

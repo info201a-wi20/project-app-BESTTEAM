@@ -30,7 +30,7 @@ page1 <- tabPanel(
 )
 
 page2 <- tabPanel(
-  "page2",
+  "Confirmed cases & volume of stock",
   page2_ui
 )
 

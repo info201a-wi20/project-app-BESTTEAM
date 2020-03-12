@@ -173,6 +173,11 @@ myserver <- function(input, output) {
   })
 
 # page 2
+output$analysis_q2 <- renderText({
+    greeting <- p("hello")
+    return(greeting)
+})
+  
 output$graph_q2 <- renderPlot({
   if (input$q2_volume == "Confirmed cases ") {
     volume_case <- ggplot(data = new_date_frame, mapping = aes(x=Date, y=virus_df_new)) +
