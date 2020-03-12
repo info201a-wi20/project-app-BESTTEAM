@@ -146,7 +146,7 @@ new_date_frame_close <- data.frame(stock_df_close, virus_df_new)
   map_gg <- mutate(map_gg, iso3c = iso.alpha(map_gg$region, n = 3))
   
   output$graph_t1 <- renderPlot({
-    
+server_base_directory <- paste0(getwd(), "/uis")
     recover_rate <- read.csv(paste0(server_base_directory, "/page4_data/recovery_data.csv"), stringsAsFactors = FALSE)
     recover_rate[recover_rate$Country.Region == "Mainland China", "Country.Region"] = "China"
     recover_rate[recover_rate$Country.Region == "Hong Kong", "Country.Region"] = "China"

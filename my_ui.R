@@ -9,15 +9,14 @@ source(paste0(ui_base_directory, "/page2_ui.R"))       # added
 source(paste0(ui_base_directory, "/page3_ui.R"))
 source(paste0(ui_base_directory, "/page4_ui(map).R"))
 source(paste0(ui_base_directory, "/page5_ui.R"))
-
-
+source(paste0(ui_base_directory, "/introduction_ui.R"))
+source(paste0(ui_base_directory, "/reference_ui.R"))
 home_page <- fluidPage(
-  "This is a place holder for the home page"
 )
 
 home <- tabPanel(
   "Introduction",
-  home_page
+  introduction
 )
 
 # TODO: For your question, change page# to the title of your question which will be put in the
@@ -49,6 +48,10 @@ page5 <- tabPanel(
   page5_ui
 )
 
+ref <- tabPanel(
+  "Reference",
+  reference
+)
 myui <- navbarPage(
   "COVID-19 and The Economy",
   home,
@@ -56,5 +59,6 @@ myui <- navbarPage(
   page2,
   page3,
   page4,
-  page5
+  page5,
+  ref
 )
