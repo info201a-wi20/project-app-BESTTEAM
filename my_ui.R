@@ -6,7 +6,7 @@ ui_base_directory <- paste0(getwd(), "/uis")
 # TODO: source your ui .R file here, make sure to put it in the /uis directory.
 source(paste0(ui_base_directory, "/page1_ui.R"))
 source(paste0(ui_base_directory, "/page2_ui.R"))       # added
-
+source(paste0(ui_base_directory, "/page3_ui.R"))
 source(paste0(ui_base_directory, "/page4_ui(map).R"))
 source(paste0(ui_base_directory, "/page5_ui.R"))
 
@@ -36,7 +36,7 @@ page2 <- tabPanel(
 
 page3 <- tabPanel(
   "page3",
-  home_page
+  page3_ui
 )
 
 page4 <- tabPanel(

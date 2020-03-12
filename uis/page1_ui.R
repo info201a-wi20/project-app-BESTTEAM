@@ -89,6 +89,7 @@ region_input <- selectInput(
 )
 date_choices <- as.Date(natural_gas$Date)
 
+
 page1 <- tabPanel(
   "COVID 19 & Price of Natural Gas",
   titlePanel("COVID 19 & Price of Natural Gas"),
