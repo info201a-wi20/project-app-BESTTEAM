@@ -24,8 +24,7 @@ page3_ui <- fluidPage(
       h3("Graph: "),
       plotOutput(outputId = "graph_q3")
     )
-  ),
-  textOutput("analysis_q3")
+  )
 )
 
 
